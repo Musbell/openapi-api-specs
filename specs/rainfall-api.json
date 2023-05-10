@@ -139,7 +139,7 @@
         "operationId": "getRainfallMeasures",
         "parameters": [
           {
-            "$ref": "#/components/parameters/station"
+            "$ref": "#/components/parameters/station_in_query"
           },
           {
             "$ref": "#/components/parameters/_limit"
@@ -200,7 +200,8 @@
         "operationId": "getRainfallReadings",
         "parameters": [
           {
-            "$ref": "#/components/parameters/station"
+            "$ref": "#/components/parameters/station_in_query",
+            
           },
           {
             "$ref": "#/components/parameters/_limit"
@@ -398,6 +399,16 @@
         "required": true,
         "schema": {
           "type": "string"
+        }
+      },
+        "station_in_query": {
+        "name": "station",
+        "in": "query",
+        "description": "The URI of the monitoring station supplying the measure",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "http://environment.data.gov.uk/flood-monitoring/id/stations/4163"
         }
       },
       "label": {
