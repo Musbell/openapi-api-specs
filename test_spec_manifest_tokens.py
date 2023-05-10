@@ -37,5 +37,5 @@ if __name__ == '__main__':
         text = spec.typescript_prompt_string(plugin_name)
         enc = tiktoken.get_encoding("cl100k_base")
         encoded = enc.encode(text)
-        print(plugin_name, len(encoded), '\n')
         print(text)
+        print(plugin_name, len(encoded), '\n')

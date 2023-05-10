@@ -1,0 +1,364 @@
+openapi: 3.0.0
+info:
+  title: Environment Agency Rainfall API
+  version: 1.0.0
+  description: |
+        
+        The Rainfall API offers real-time access to rainfall data from ~1000 telemetric rain gauges, with 15-minute accumulated totals updated once or twice daily.
+        
+        | Parameter      | Description | 
+        | ---------------- | ------------|
+        | parameter              | Parameter to filter by     | 
+        |  _limit              | Limit the number of results returned| 
+        |   _offset              |Offset the results returned| 
+        |   _view              |View to return| 
+        |   _sorted              | Sort the results returned| 
+        |   qualifier              |  A qualifier for the quantity being measured - 'Tipping Bucket Raingauge'| 
+        |   parameterName              | The name of the quantity being measured - 'Rainfall'| 
+        |   station (in PATH)              |Station to return measurements for| 
+        |   station (in QUERY)            |The URI of the monitoring station supplying the measure| 
+        |   label             |This query retrieves stations with a specific exact label.| 
+        |   stationReference             |This query fetches stations from the Environment Agency database that match a specific internal reference identifier.| 
+        |   RLOIid             |This query retrieves the station with a specific River Levels on the Internet identifier (RLOIid).| 
+        |   search             |This query retrieves stations with a label that contains a specific term.| 
+        |   lat             | Latitude of the station, in WGS84 coordinate ref, rounded to 100m grid| 
+        |   long             |Longitude of the station, in WGS84 coordinate ref, rounded to 100m grid| 
+        |   dist             | This query returns stations within a certain distance (in km) of a specified latitude/longitude (WGS84 coordinates), approximated by a bounding box. The distance must be an integer.| 
+        |   latest             | Return only the most recently available reading for each included measure. Include 'latest' in the query for true| 
+        |   today             |Return all the readings taken today for each included measure. Include 'today' in the query for true| 
+        |   date             |Return all the readings taken on the specified day for each included measure.| 
+        |   startdate             | Return all the readings taken on or after the specified date for each included measure.| 
+        |   enddate             |Return all the readings taken on or before the specified date for each included measure.| 
+        |   since             |Return all the readings taken since the specified date for each included measure.| 
+  contact:
+    name: Department for Environment Food & Rural Affairs
+    url: https://environment.data.gov.uk/
+servers:
+  - url: https://environment.data.gov.uk/flood-monitoring
+    description: Live server
+  - url: http://environment.data.gov.uk/flood-monitoring
+    description: Live server
+tags:
+  - name: Stations
+    description: The real-time data API provides real-time rainfall, water levels, and flow measurements from various monitoring stations, along with metadata about the stations and measurements.
+  - name: Measures
+    description: In addition to listing stations and their available measures, you can directly list the available measures.
+paths:
+  /id/stations:
+    get:
+      tags:
+        - Stations
+      description: All rainfall measurement stations
+      operationId: getRainfallStations
+      parameters:
+        - $ref: '#/components/parameters/_limit'
+        - $ref: '#/components/parameters/_offset'
+        - $ref: '#/components/parameters/parameter'
+        - $ref: '#/components/parameters/qualifier'
+        - $ref: '#/components/parameters/RLOIid'
+        - $ref: '#/components/parameters/lat'
+        - $ref: '#/components/parameters/lng'
+        - $ref: '#/components/parameters/dist'
+        - $ref: '#/components/parameters/label'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /id/stations/{station}/measures:
+    get:
+      tags:
+        - Measures
+      description: All measures available from a particular station
+      operationId: getRainfallMeasuresForStation
+      parameters:
+        - $ref: '#/components/parameters/station'
+        - $ref: '#/components/parameters/qualifier'
+        - $ref: '#/components/parameters/stationReference'
+        - $ref: '#/components/parameters/search'
+        - $ref: '#/components/parameters/parameterName'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /id/stations/{station}:
+    get:
+      tags:
+        - Stations
+      description: Information on from a particular station
+      operationId: getRainfallStation
+      parameters:
+        - $ref: '#/components/parameters/station'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /id/measures:
+    get:
+      tags:
+        - Measures
+      description: 'All measures from across all the stations:'
+      operationId: getRainfallMeasures
+      parameters:
+        - $ref: '#/components/parameters/station_in_query'
+        - $ref: '#/components/parameters/_limit'
+        - $ref: '#/components/parameters/_offset'
+        - $ref: '#/components/parameters/parameter'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/qualifier'
+        - $ref: '#/components/parameters/stationReference'
+        - $ref: '#/components/parameters/parameterName'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /data/readings:
+    get:
+      tags:
+        - Stations
+      description: 'All readings for all measures from across all the stations:'
+      operationId: getRainfallReadings
+      parameters:
+        - $ref: '#/components/parameters/station_in_query'
+        - $ref: '#/components/parameters/_limit'
+        - $ref: '#/components/parameters/_offset'
+        - $ref: '#/components/parameters/parameter'
+        - $ref: '#/components/parameters/latest'
+        - $ref: '#/components/parameters/today'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/startdate'
+        - $ref: '#/components/parameters/enddate'
+        - $ref: '#/components/parameters/qualifier'
+        - $ref: '#/components/parameters/stationReference'
+        - $ref: '#/components/parameters/_view'
+        - $ref: '#/components/parameters/_sorted'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /id/measures/{measure}/readings:
+    get:
+      tags:
+        - Measures
+      description: 'All readings for a particular measure:'
+      operationId: getRainfallReadingsForMeasure
+      parameters:
+        - name: measure
+          in: path
+          description: Measure to return readings for
+          required: true
+          schema:
+            type: string
+        - $ref: '#/components/parameters/_limit'
+        - $ref: '#/components/parameters/_offset'
+        - $ref: '#/components/parameters/parameter'
+        - $ref: '#/components/parameters/latest'
+        - $ref: '#/components/parameters/today'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/startdate'
+        - $ref: '#/components/parameters/enddate'
+        - $ref: '#/components/parameters/since'
+        - $ref: '#/components/parameters/_view'
+        - $ref: '#/components/parameters/_sorted'
+        - $ref: '#/components/parameters/parameterName'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+  /id/stations/{station}/readings:
+    get:
+      tags:
+        - Stations
+      description: 'All readings for measures from a particular station:'
+      operationId: getRainfallReadingsForStation
+      parameters:
+        - $ref: '#/components/parameters/station'
+        - $ref: '#/components/parameters/parameter'
+        - $ref: '#/components/parameters/_limit'
+        - $ref: '#/components/parameters/_offset'
+        - $ref: '#/components/parameters/today'
+        - $ref: '#/components/parameters/date'
+        - $ref: '#/components/parameters/startdate'
+        - $ref: '#/components/parameters/enddate'
+        - $ref: '#/components/parameters/since'
+        - $ref: '#/components/parameters/_view'
+        - $ref: '#/components/parameters/_sorted'
+        - $ref: '#/components/parameters/search'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  parameters:
+    parameter:
+      name: parameter
+      in: query
+      required: true
+      schema:
+        type: string
+        enum:
+          - rainfall
+        default: rainfall
+    _limit:
+      name: _limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+    _offset:
+      name: _offset
+      in: query
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+    _view:
+      name: _view
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - full
+        default: full
+    _sorted:
+      name: _sorted
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: true
+    qualifier:
+      name: qualifier
+      in: query
+      required: false
+      schema:
+        type: string
+    parameterName:
+      name: parameterName
+      in: query
+      required: false
+      schema:
+        type: string
+    station:
+      name: station
+      in: path
+      required: true
+      schema:
+        type: string
+    station_in_query:
+      name: station
+      in: query
+      required: true
+      schema:
+        type: string
+        example: http://environment.data.gov.uk/flood-monitoring/id/stations/4163
+    label:
+      name: label
+      in: query
+      required: false
+      schema:
+        type: string
+    stationReference:
+      name: stationReference
+      in: query
+      required: false
+      schema:
+        type: string
+    RLOIid:
+      name: RLOIid
+      in: query
+      required: false
+      schema:
+        type: string
+    search:
+      name: search
+      in: query
+      required: false
+      schema:
+        type: string
+    lat:
+      name: lat
+      in: query
+      required: false
+      schema:
+        type: string
+    lng:
+      name: long
+      in: query
+      required: false
+      schema:
+        type: string
+    dist:
+      name: dist
+      in: query
+      required: false
+      schema:
+        type: number
+    latest:
+      name: latest
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+    today:
+      name: today
+      in: query
+      required: false
+      schema:
+        type: boolean
+        default: false
+    date:
+      name: date
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+    startdate:
+      name: startdate
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+    enddate:
+      name: enddate
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date
+    since:
+      name: since
+      in: query
+      required: false
+      schema:
+        type: string
+        format: date-time
