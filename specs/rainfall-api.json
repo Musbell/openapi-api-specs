@@ -151,32 +151,13 @@
             "$ref": "#/components/parameters/parameter"
           },
           {
-            "$ref": "#/components/parameters/latest"
-          },
-          {
-            "$ref": "#/components/parameters/today"
-          },
-          {
             "$ref": "#/components/parameters/date"
-          },
-          {
-            "$ref": "#/components/parameters/startdate"
-          },
-          {
-            "$ref": "#/components/parameters/enddate"
           },
           {
             "$ref": "#/components/parameters/qualifier"
           },
           {
             "$ref": "#/components/parameters/stationReference"
-          },
-
-          {
-            "$ref": "#/components/parameters/_view"
-          },
-          {
-            "$ref": "#/components/parameters/_sorted"
           }
         ],
         "responses": {
@@ -333,18 +314,6 @@
           },
           {
             "$ref": "#/components/parameters/_offset"
-          },
-        {
-             "$ref": "#/components/parameters/_limit"
-          },
-          {
-            "$ref": "#/components/parameters/_offset"
-          },
-          {
-            "$ref": "#/components/parameters/parameter"
-          },
-          {
-            "$ref": "#/components/parameters/latest"
           },
           {
             "$ref": "#/components/parameters/today"
@@ -533,19 +502,19 @@
       "lat": {
         "name": "lat",
         "in": "query",
-        "description": "Latitude of the station",
+        "description": "Latitude of the station, in WGS84 coordinate ref, rounded to 100m grid",
         "required": false,
         "schema": {
-          "type": "number"
+          "type": "string"
         }
       },
       "lng": {
-        "name": "lng",
+        "name": "long",
         "in": "query",
-        "description": "Longitude of the station",
+        "description": "Longitude of the station, in WGS84 coordinate ref, rounded to 100m grid",
         "required": false,
         "schema": {
-          "type": "number"
+          "type": "string"
         }
       },
       "dist": {
