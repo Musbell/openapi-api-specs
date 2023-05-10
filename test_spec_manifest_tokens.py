@@ -29,8 +29,7 @@ import tiktoken
 
 if __name__ == '__main__':
     data = [
-        # ("restroom","https://raw.githubusercontent.com/Musbell/REFUGE-Restroom-API/main/restroom-api.json")
-        ("lorem-picsum", "https://raw.githubusercontent.com/Musbell/Lorem-Picsum/main/lorem-picsum.json")
+        ("rainfall", "https://raw.githubusercontent.com/Musbell/openapi-api-specs/main/specs/rainfall-api.json")
     ]
     for plugin_name, spec_url in data:
         spec_dict = load_spec(spec_url)

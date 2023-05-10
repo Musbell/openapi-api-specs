@@ -479,7 +479,7 @@
       "stationReference": {
         "name": "stationReference",
         "in": "query",
-        "description": "Returns stations with a specific reference identifier 'x', an internal identifier used by the Environment Agency e,g ?stationReference=x",
+        "description": "This query fetches stations from the Environment Agency database that match a specific internal reference identifier.",
         "required": false,
         "schema": {
           "type": "string"
@@ -488,7 +488,7 @@
       "RLOIid": {
         "name": "RLOIid",
         "in": "query",
-        "description": "Return only the station (if there is one) whose RLOIid (River Levels on the Internet identifier) matches r e.g ?RLOIid=r",
+        "description": "This query retrieves the station with a specific River Levels on the Internet identifier (RLOIid).",
         "required": false,
         "schema": {
           "type": "string"
@@ -524,7 +524,7 @@
       "dist": {
         "name": "dist",
         "in": "query",
-        "description": "Returns stations within 'd' km of a specified latitude/longitude (WGS84 coordinates), approximated by a bounding box. 'd' must be an integer. e.g ?lat=y&long=x&dist=d",
+        "description": "This query returns stations within a certain distance (in km) of a specified latitude/longitude (WGS84 coordinates), approximated by a bounding box. The distance must be an integer.",
         "required": false,
         "schema": {
           "type": "number"
