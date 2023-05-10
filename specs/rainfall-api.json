@@ -62,6 +62,9 @@
           },
           {
             "$ref": "#/components/parameters/label"
+          },
+          {
+            "$ref": "#/components/parameters/search"
           }
         ],
         "responses": {
@@ -92,6 +95,12 @@
           },
           {
             "$ref": "#/components/parameters/stationReference"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "$ref": "#/components/parameters/parameterName"
           }
         ],
         "responses": {
@@ -158,6 +167,9 @@
           },
           {
             "$ref": "#/components/parameters/stationReference"
+          },
+          {
+            "$ref": "#/components/parameters/parameterName"
           }
         ],
         "responses": {
@@ -218,6 +230,9 @@
           },
           {
             "$ref": "#/components/parameters/_sorted"
+          },
+          {
+            "$ref": "#/components/parameters/search"
           }
         ],
         "responses": {
@@ -281,6 +296,9 @@
           },
           {
             "$ref": "#/components/parameters/_sorted"
+          },
+          {
+            "$ref": "#/components/parameters/parameterName"
           }
         ],
         "responses": {
@@ -335,6 +353,9 @@
           },
           {
             "$ref": "#/components/parameters/_sorted"
+          },
+          {
+            "$ref": "#/components/parameters/search"
           }
         ],
         "responses": {
@@ -426,24 +447,7 @@
           "type": "string"
         }
       },
-      "period": {
-        "name": "period",
-        "in": "query",
-        "description": "The period between successive readings, in seconds.",
-        "required": false,
-        "schema": {
-          "type": "number"
-        }
-      },
-      "unitName": {
-        "name": "unitName",
-        "in": "query",
-        "description": "The name of the unit of measurement - 'millimetres'",
-        "required": false,
-        "schema": {
-          "type": "string"
-        }
-      },
+
       "station": {
         "name": "station",
         "in": "path",
