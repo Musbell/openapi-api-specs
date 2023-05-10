@@ -1,0 +1,111 @@
+nobel-prize-master-data.laureate
+nobel-prize-master-data.laureates
+nobel-prize-master-data.nobelPrize
+nobel-prize-master-data.nobelPrizes
+
+
+{
+       {
+            "name": "csvLang",
+            "in": "query",
+            "description": "Language if output format is csv (default = en).",
+            "required": false,
+            "type": "string",
+            "enum": ["en", "se", "no"]
+          }
+        {
+            "name": "motivation",
+            "in": "query",
+            "description": "Text in Laureate's motivation",
+            "required": false,
+            "type": "string"
+          },
+           {
+            "name": "foundedDate",
+            "in": "query",
+            "description": "Founding date of Laureate if Organization. Search by year in the form of YYYY, by month -MM-, by day -DD or YYYY-MM-DD",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+
+        {
+            "name": "affiliation",
+            "in": "query",
+            "description": "Affiliation(s) for the Laureate at the time of the award",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "residence",
+            "in": "query",
+            "description": "Laureate's place of residence at the time is awarded",
+            "required": false,
+            "type": "string"
+          },
+            {
+            "name": "foundedCity",
+            "in": "query",
+            "description": "City where organization was founded",
+            "required": false,
+            "type": "string",
+            "format": "utf-8"
+          },
+          {
+            "name": "foundedCountry",
+            "in": "query",
+            "description": "Country where organization was founded",
+            "required": false,
+            "type": "string",
+            "format": "utf-8"
+          },
+          {
+            "name": "foundedContinent",
+            "in": "query",
+            "description": "Continent where organization was founded. Continent as in geonames.org standard",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Africa",
+              "Asia",
+              "Europe",
+              "North America",
+              "Oceania",
+              "South America",
+              "Antarctica"
+            ]
+          },
+          {
+            "name": "HeadquartersCity",
+            "in": "query",
+            "description": "City where organization's hearquarters are",
+            "required": false,
+            "type": "string",
+            "format": "utf-8"
+          },
+          {
+            "name": "HeadquartersCountry",
+            "in": "query",
+            "description": "Country where organization's hearquarters are",
+            "required": false,
+            "type": "string",
+            "format": "utf-8"
+          },
+          {
+            "name": "HeadquartersContinent",
+            "in": "query",
+            "description": "Continent where organization's hearquarters are. Continent as in geonames.org standard",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "Africa",
+              "Asia",
+              "Europe",
+              "North America",
+              "Oceania",
+              "South America",
+              "Antarctica"
+            ]
+          },
+
+}

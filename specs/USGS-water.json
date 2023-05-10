@@ -1,0 +1,214 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "USGS Water Services API",
+    "description": "You can use this service to retrieve recent and historical values for streamflow as well as data for other regular time-series parameters served by the USGS. This service provides these USGS water data in Extensible Markup Language (XML), Javascript Object Notation (JSON) and the legacy RDB (tab-delimited) format currently available from the USGS Water Data for the Nation site External Link. More media types will follow.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "USGS",
+      "url": "https://www.usgs.gov/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://waterservices.usgs.gov/nwis/iv"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Instantaneous "],
+        "summary": "USGS Instantaneous Values Web Service",
+        "description": "Retrieve recent and historical values for streamflow as well as data for other regular time-series parameters served by the USGS",
+        "operationId": "getInstantaneousValues",
+        "parameters": [
+          {
+            "name": "stateCd",
+            "in": "query",
+            "required": true,
+            "description": "U.S. postal service (2-digit) state code.<a href='https://about.usps.com/who/profile/history/state-abbreviations.htm'>USPS List of State Codes</a>",
+            "schema": {
+              "type": "string",
+              "example": "NY"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": true,
+            "description": "Used to specify the output format of the data returned. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#format'>Click to view description</a>",
+            "schema": {
+              "enum": ["json"],
+              "type": "string",
+              "example": "json"
+            }
+          },
+          {
+            "name": "parameterCd",
+            "in": "query",
+            "description": "All parameter codes are numeric and 5 characters in length. Parameter codes are used to identify the constituent measured and the units of measure. Popular codes include stage (00065), discharge in cubic feet per second (00060) and water temperature in degrees Celsius (00010). <a href='https://waterservices.usgs.gov/rest/IV-Service.html#parameterCd'>Click to view description</a>",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["00060", "00065", "00010"],
+              "example": "00060"
+            }
+          },
+          {
+            "name": "siteStatus",
+            "in": "query",
+            "description": "Selects sites based on whether or not they are active. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#siteStatus'>Click to view description</a>",
+            "required": true,
+            "schema": {
+              "enum": ["all", "active", "inactive"],
+              "type": "string",
+              "example": "all"
+            }
+          },
+          {
+            "name": "siteType",
+            "in": "query",
+            "description": "Restricts sites to those having one or more major and/or minor site type <a href='https://waterservices.usgs.gov/rest/IV-Service.html#siteType'>Click to view description</a>",
+            "required": true,
+            "schema": {
+              "enum": [
+                "AG",
+                "AS",
+                "AT",
+                "AW",
+                "ES",
+                "FA",
+                "GL",
+                "GW",
+                "LA",
+                "LK",
+                "OC",
+                "SB",
+                "SP",
+                "SS",
+                "ST",
+                "WE"
+              ],
+              "type": "string",
+              "example": "ST",
+              "default": "ST"
+            }
+          },
+          {
+            "name": "agencyCd",
+            "in": "query",
+            "description": "Agency code for the site. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#agencyCd'>Click to view description</a>",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "USGS",
+              "default": "USGS"
+            }
+          },
+          {
+            "name": "altMin",
+            "in": "query",
+            "description": "These arguments allows you to select instantaneous values sites where the associated sites' altitude are within a desired altitude, expressed in feet. Altitude is based on the datum used at the site. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#altMin'>Click to view description</a>",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 1000
+            }
+          },
+          {
+            "name": "altMax",
+            "in": "query",
+            "description": "These arguments allows you to select instantaneous values sites where the associated sites' altitude are within a desired altitude, expressed in feet. Altitude is based on the datum used at the site. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#altMin'>Click to view description</a>",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 5000
+            }
+          },
+          {
+            "name": "drainAreaMin",
+            "in": "query",
+            "description": "These arguments allows you to select principally surface water sites where the associated sites' drainage areas (watersheds) are within a desired size, expressed in square miles or decimal fractions thereof. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#SW'>Click to view description</a>",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 100
+            }
+          },
+          {
+            "name": "drainAreaMax",
+            "in": "query",
+            "description": "These arguments allows you to select principally surface water sites where the associated sites' drainage areas (watersheds) are within a desired size, expressed in square miles or decimal fractions thereof. <a href='https://waterservices.usgs.gov/rest/IV-Service.html#SW'>Click to view description</a>",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "example": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SiteResponse"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not modified"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Access Forbidden"
+          },
+          "404": {
+            "description": "Not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          },
+          "503": {
+            "description": "Service unavailable"
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Instantaneous "
+    }
+  ],
+  "components": {
+    "schemas": {
+      "SiteResponse": {},
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

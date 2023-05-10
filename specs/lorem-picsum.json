@@ -1,0 +1,233 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Lorem Picsum API",
+    "description": "The Lorem Ipsum for photos.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "David Marby & Nijiko Yonskai",
+      "email": "david@dmarby.se",
+      "url": "https://twitter.com/DMarby"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://picsum.photos",
+      "description": "Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Images",
+      "description": "List images; retrieve image info."
+    },
+    {
+      "name": "Static Random Image",
+      "description": "static random image endpoints"
+    },
+    {
+      "name": "Custom Image",
+      "description": "Get grayscale, blurred image via custom endpoints."
+    }
+  ],
+  "paths": {
+    "/v2/list": {
+      "get": {
+        "operationId": "getList",
+        "summary": "List all images",
+        "description": "Returns a list of all images on the server.",
+        "tags": ["Images"],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "The page number to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of images to return per page",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/id/{id}/info": {
+      "get": {
+        "operationId": "getImageInformation",
+        "summary": "Get image information",
+        "description": "Returns information about an image.",
+        "tags": ["Images"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The image id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/{width}/{height}": {
+      "get": {
+        "operationId": "getStaticRandomImage",
+        "summary": "Get static random image",
+        "description": "Returns a static random image.",
+        "tags": ["Static Random Image"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/width"
+          },
+          {
+            "$ref": "#/components/parameters/height"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "image_url": {
+                      "type": "string",
+                      "example": "https://example.com/image.jpg"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/{image}/{width}/{height}.{format}": {
+      "get": {
+        "operationId": "getCustomImage",
+        "summary": "Get custom image",
+        "description": "Returns a custom image.",
+        "tags": ["Custom Image"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/width"
+          },
+          {
+            "$ref": "#/components/parameters/height"
+          },
+          {
+            "name": "image",
+            "in": "path",
+            "description": "The image id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/blur"
+          },
+          {
+            "$ref": "#/components/parameters/grayscale"
+          },
+          {
+            "$ref": "#/components/parameters/format"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "width": {
+        "name": "width",
+        "in": "path",
+        "description": "The width of the image to download",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "default": 200
+        }
+      },
+      "height": {
+        "name": "height",
+        "in": "path",
+        "description": "The height of the image to download",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "default": 200
+        }
+      },
+      "blur": {
+        "name": "blur",
+        "in": "query",
+        "description": "The blur of the image to download. Adjust blur intensity (1-10) using blur image endpoints.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1
+        }
+      },
+      "grayscale": {
+        "name": "grayscale",
+        "in": "query",
+        "description": "Whether the image should be grayscale",
+        "required": false,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "format": {
+        "name": "format",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": ["jpg", "webp"]
+        }
+      }
+    }
+  }
+}

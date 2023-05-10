@@ -1,0 +1,528 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Environment Agency Rainfall API",
+    "version": "1.0.0",
+    "description": "The Rainfall API offers real-time access to rainfall data from ~1000 telemetric rain gauges, with 15-minute accumulated totals updated once or twice daily.",
+    "contact": {
+      "name": "Department for Environment Food & Rural Affairs",
+      "url": "https://environment.data.gov.uk/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://environment.data.gov.uk/flood-monitoring",
+      "description": "Live server"
+    },
+    {
+      "url": "http://environment.data.gov.uk/flood-monitoring",
+      "description": "Live server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Stations",
+      "description": "The real-time data API provides real-time rainfall, water levels, and flow measurements from various monitoring stations, along with metadata about the stations and measurements."
+    },
+    {
+      "name": "Measures",
+      "description": "In addition to listing stations and their available measures, you can directly list the available measures."
+    }
+  ],
+  "paths": {
+    "/id/stations": {
+      "get": {
+        "tags": ["Stations"],
+        "description": "All rainfall measurement stations",
+        "operationId": "getRainfallStations",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/_limit"
+          },
+          {
+            "$ref": "#/components/parameters/_offset"
+          },
+          {
+            "$ref": "#/components/parameters/parameter"
+          },
+          {
+            "$ref": "#/components/parameters/qualifier"
+          },
+          {
+            "$ref": "#/components/parameters/RLOIid"
+          },
+          {
+            "$ref": "#/components/parameters/lat"
+          },
+          {
+            "$ref": "#/components/parameters/lng"
+          },
+          {
+            "$ref": "#/components/parameters/dist"
+          },
+          {
+            "$ref": "#/components/parameters/label"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/stations/{station}/measures": {
+      "get": {
+        "tags": ["Measures"],
+        "description": "All measures available from a particular station",
+        "operationId": "getRainfallMeasuresForStation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/station"
+          },
+          {
+            "$ref": "#/components/parameters/qualifier"
+          },
+          {
+            "$ref": "#/components/parameters/stationReference"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/stations/{station}": {
+      "get": {
+        "tags": ["Stations"],
+        "description": "Information on from a particular station",
+        "operationId": "getRainfallStation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/station"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/measures": {
+      "get": {
+        "tags": ["Measures"],
+        "description": "All measures from across all the stations:",
+        "operationId": "getRainfallMeasures",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/station"
+          },
+          {
+            "$ref": "#/components/parameters/_limit"
+          },
+          {
+            "$ref": "#/components/parameters/_offset"
+          },
+          {
+            "$ref": "#/components/parameters/parameter"
+          },
+          {
+            "$ref": "#/components/parameters/latest"
+          },
+          {
+            "$ref": "#/components/parameters/today"
+          },
+          {
+            "$ref": "#/components/parameters/date"
+          },
+           {
+             "$ref": "#/components/parameters/startdate"
+           },
+            {
+              "$ref": "#/components/parameters/enddate"
+            },
+            {
+              "$ref": "#/components/parameters/qualifier"
+            },
+             {
+               "$ref": "#/components/parameters/stationReference"
+             },
+           
+               {
+                 "$ref": "#/components/parameters/_view"
+               },
+               {
+                 "$ref": "#/components/parameters/_sorted"
+               }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/readings": {
+      "get": {
+        "tags": ["Stations"],
+        "description": "All readings for all measures from across all the stations:",
+        "operationId": "getRainfallReadings",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/station"
+          },
+          {
+            "$ref": "#/components/parameters/_limit"
+          },
+          {
+            "$ref": "#/components/parameters/_offset"
+          },
+          {
+            "$ref": "#/components/parameters/parameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/measures/{measure}/readings": {
+      "get": {
+        "tags": ["Measures"],
+        "description": "All readings for a particular measure:",
+        "operationId": "getRainfallReadingsForMeasure",
+        "parameters": [
+          {
+            "name": "measure",
+            "in": "path",
+            "description": "Measure to return readings for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/_limit"
+          },
+          {
+            "$ref": "#/components/parameters/_offset"
+          },
+          {
+            "$ref": "#/components/parameters/parameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/id/stations/{station}/readings": {
+      "get": {
+        "tags": ["Stations"],
+        "description": "All readings for measures from a particular station:",
+        "operationId": "getRainfallReadingsForStation",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/station"
+          },
+          {
+            "$ref": "#/components/parameters/parameter"
+          },
+          {
+            "$ref": "#/components/parameters/_limit"
+          },
+          {
+            "$ref": "#/components/parameters/_offset"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "parameter": {
+        "name": "parameter",
+        "in": "query",
+        "description": "Parameter to filter by",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "enum": ["rainfall"],
+          "default": "rainfall"
+        }
+      },
+      "_limit": {
+        "name": "_limit",
+        "in": "query",
+        "description": "Limit the number of results returned",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 10
+        }
+      },
+      "_offset": {
+        "name": "_offset",
+        "in": "query",
+        "description": "Offset the results returned",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "format": "int32",
+          "default": 0
+        }
+      },
+      "_view": {
+        "name": "_view",
+        "in": "query",
+        "description": "View to return",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": ["full"],
+          "default": "full"
+        }
+      },
+      "_sorted": {
+        "name": "_sorted",
+        "in": "query",
+        "description": "Sort the results returned",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "qualifier": {
+        "name": "qualifier",
+        "in": "query",
+        "description": "A qualifier for the quantity being measured - 'Tipping Bucket Raingauge'",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "parameterName": {
+        "name": "parameterName",
+        "in": "query",
+        "description": "The name of the quantity being measured - 'Rainfall'",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "period": {
+        "name": "period",
+        "in": "query",
+        "description": "The period between successive readings, in seconds.",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      "unitName": {
+        "name": "unitName",
+        "in": "query",
+        "description": "The name of the unit of measurement - 'millimetres'",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "station": {
+        "name": "station",
+        "in": "path",
+        "description": "Station to return measurements for",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "label": {
+        "name": "label",
+        "in": "query",
+        "description": "Return only those stations whose label is exactly x e.g ?label=x",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "stationReference": {
+        "name": "stationReference",
+        "in": "query",
+        "description": "Returns stations with a specific reference identifier 'x', an internal identifier used by the Environment Agency e,g ?stationReference=x",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "RLOIid": {
+        "name": "RLOIid",
+        "in": "query",
+        "description": "Return only the station (if there is one) whose RLOIid (River Levels on the Internet identifier) matches r e.g ?RLOIid=r",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "search": {
+        "name": "search",
+        "in": "query",
+        "description": "Return only those stations whose label contains x e.g ?search=x",
+        "required": false,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "lat": {
+        "name": "lat",
+        "in": "query",
+        "description": "Latitude of the station",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      "lng": {
+        "name": "lng",
+        "in": "query",
+        "description": "Longitude of the station",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      "dist": {
+        "name": "dist",
+        "in": "query",
+        "description": "Returns stations within 'd' km of a specified latitude/longitude (WGS84 coordinates), approximated by a bounding box. 'd' must be an integer. e.g ?lat=y&long=x&dist=d",
+        "required": false,
+        "schema": {
+          "type": "number"
+        }
+      },
+      "latest": {
+        "name": "latest",
+        "in": "query",
+        "description": "Return only the most recently available reading for each included measure. Include 'latest' in the query for true",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "today": {
+        "name": "today",
+        "in": "query",
+        "description": "Return all the readings taken today for each included measure. Include 'today' in the query for true",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "date": {
+        "name": "date",
+        "in": "query",
+        "description": "Return all the readings taken on the specified day for each included measure.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "startdate": {
+        "name": "startdate",
+        "in": "query",
+        "description": "Return all the readings taken on or after the specified date for each included measure.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "enddate": {
+        "name": "enddate",
+        "in": "query",
+        "description": "Return all the readings taken on or before the specified date for each included measure.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date"
+        }
+      },
+      "since": {
+        "name": "since",
+        "in": "query",
+        "description": "Return all the readings taken since the specified date for each included measure.",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

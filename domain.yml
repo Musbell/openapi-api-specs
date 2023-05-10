@@ -1,0 +1,342 @@
+openapi: 3.0.0
+servers:
+  - url: 'https://api.domainsdb.info/v1'
+info:
+  title: Domains-Index API
+  version: '1.0'
+  description: |
+     The Domains-Index API provides access to a database of domain names, including domain details, TLD statistics, and zone information.
+      ### Parameters
+      - page: The page parameter is used to retrieve paginated results.
+      - limit: The limit parameter is used to specify the maximum number of results to return per page.
+  contact:
+    name: Domains-Index
+    url: 'https://domainsdb.info'
+paths:
+  /domains/search:
+    get:
+      description: Retrieve a list of domain names based on specified search criteria.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Search_Results'
+        '404':
+          description: Results not found
+      summary: Domains Database Search
+      operationId: get_domains_search
+      parameters:
+        - name: date
+          in: query
+          description: Filter domains by creation or update date.
+          schema:
+            type: string
+        - name: page    
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: domain
+          in: query
+          description: Filter domains by partial or full domain name.
+          schema:
+            type: string
+        - name: zone
+          in: query
+          description: Filter domains by zone (e.g., "com").
+          schema:
+            type: string
+        - name: country
+          in: query
+          description: Filter domains by hosting country code (e.g., "US").
+          schema:
+            type: string
+        - name: isDead
+          in: query
+          description: Filter by whether the domain is dead (true) or not (false).
+          schema:
+            type: boolean
+        - name: A
+          in: query
+          description: Filter domains by A record.
+          schema:
+            type: string
+        - name: NS
+          in: query
+          description: Filter domains by NS record.
+          schema:
+            type: string
+        - name: CNAME
+          in: query
+          description: Filter domains by CNAME record.
+          schema:
+            type: string
+        - name: MX
+          in: query
+          description: Filter domains by MX record.
+          schema:
+            type: string
+        - name: TXT
+          in: query
+          description: Filter domains by TXT record.
+          schema:
+            type: string
+      tags:
+        - domains/
+  /info/stat:
+    get:
+      description: Retrieve overall statistics for all zones, including total records and changes over time.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone_stats'
+      summary: Returns overall stagtistics
+      operationId: get_info_stat
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      tags:
+        - info/
+  '/info/stat/{zone}':
+    parameters:
+      - name: zone
+        in: path
+        required: true
+        description: The zone (e.g., "com") for which to retrieve statistics.
+        schema:
+          type: string
+    get:
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone_stats'
+        '404':
+          description: Zone not found.
+      summary: Returns statistics for specific zone
+      description: Retrieve statistics for a specific zone, including total records and changes over time.
+      operationId: get_info_stat_zone
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      tags:
+        - info/
+  /info/tld:
+    get:
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Zone_info'
+      summary: Returns overall Tld info
+      operationId: get_info_tld
+      description: Retrieve information about all top-level domains (TLDs), including types and descriptions.
+      tags:
+        - info/
+  '/info/tld/{zone}':
+    parameters:
+      - name: zone
+        in: path
+        required: true
+        description: The zone (e.g., "com") for which to retrieve TLD information.
+        schema:
+          type: string
+    get:
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone_info'
+        '404':
+          description: Zone not found.
+      summary: Returns statistics for specific zone
+      operationId: get_info_tld_zone
+      description: Retrieve information about a specific top-level domain (TLD) zone, including types and descriptions.
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: string
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      tags:
+        - info/
+tags:
+  - name: info/
+    description: TLD Statistics
+  - name: domains/
+    description: Domains Database
+components:
+  schemas:
+    Domains:
+      properties:
+        domain:
+          type: string
+          description: Domain name
+        create_date:
+          type: string
+          format: date-time
+          description: Domain creation date
+        update_date:
+          type: string
+          format: date-time
+          description: Domain last update date
+        country:
+          type: string
+          description: Hosting Country
+        isDead:
+          type: string
+          description: If Domain is Dead
+        A:
+          type: array
+          items:
+            type: string
+            description: A record
+        NS:
+          type: array
+          items:
+            type: string
+            description: NS record
+        CNAME:
+          type: array
+          items:
+            type: string
+            description: CNAME record
+        MX:
+          type: array
+          items:
+            $ref: '#/components/schemas/MX_records'
+        TXT:
+          type: array
+          items:
+            type: string
+            description: TXT record
+      type: object
+    Zone_stats:
+      allOf:
+        - $ref: '#/components/schemas/Response_Parameters'
+        - properties:
+            statistics:
+              type: array
+              items:
+                $ref: '#/components/schemas/Zone_statistics'
+          type: object
+    Response_Parameters:
+      required:
+        - time
+      properties:
+        total:
+          type: integer
+          description: Total days reported
+        time:
+          type: string
+          description: Time took
+        next_page:
+          type: string
+          description: Next page id
+      type: object
+    Zone_statistics:
+      required:
+        - date
+        - dec
+        - inc
+        - total
+        - zone
+      properties:
+        zone:
+          type: string
+          description: TLD name
+        date:
+          type: string
+          format: date-time
+          description: Report Date
+        dec:
+          type: integer
+          description: Increase
+        inc:
+          type: integer
+          description: Decrease
+        total:
+          type: integer
+          description: Total number of records
+      type: object
+    Zone_info:
+      required:
+        - type
+        - zone
+      properties:
+        zone:
+          type: string
+          description: TLD name
+        type:
+          type: string
+          description: TLD type
+        includes:
+          type: array
+          items:
+            type: string
+            description: Sub TLDs included
+        in_bundles:
+          type: array
+          items:
+            type: string
+            description: Sub TLDs included
+        description:
+          type: array
+          items:
+            type: string
+            description: Sub TLDs included
+      type: object
+    Search_Results:
+      allOf:
+        - $ref: '#/components/schemas/Response_Parameters'
+        - properties:
+            domains:
+              type: array
+              items:
+                $ref: '#/components/schemas/Domains'
+          type: object
+    MX_records:
+      properties:
+        exchange:
+          type: string
+          description: MX domain
+        priority:
+          type: integer
+      type: object

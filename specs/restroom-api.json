@@ -1,0 +1,227 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "REFUGE Restroom API",
+    "version": "1.0.0",
+    "description": "REFUGE is a web application that seeks to provide safe restroom access for transgender, intersex, and gender nonconforming individuals.",
+    "contact": {
+      "name": "REFUGE",
+      "url": "https://www.refugerestrooms.org/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://www.refugerestrooms.org/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Restrooms",
+      "description": "Everything about restrooms"
+    }
+  ],
+  "paths": {
+    "/restrooms.json": {
+      "get": {
+        "operationId": "getRestrooms",
+        "summary": "Get all restrooms",
+        "description": "Returns all restrooms",
+        "tags": ["Restrooms"],
+        "parameters": [
+          { "$ref": "#/components/parameters/Page" },
+          { "$ref": "#/components/parameters/PerPage" },
+          { "$ref": "#/components/parameters/Offset" },
+          { "$ref": "#/components/parameters/Ada" },
+          { "$ref": "#/components/parameters/Unisex" }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restrooms/by_date.json": {
+      "get": {
+        "operationId": "getRestroomsByDate",
+        "summary": "Get all restrooms by date",
+        "description": "Returns all restrooms by date",
+        "tags": ["Restrooms"],
+        "parameters": [
+          { "$ref": "#/components/parameters/Page" },
+          { "$ref": "#/components/parameters/PerPage" },
+          { "$ref": "#/components/parameters/Offset" },
+          { "$ref": "#/components/parameters/Ada" },
+          { "$ref": "#/components/parameters/Unisex" },
+          {
+            "name": "updated",
+            "in": "query",
+            "description": "Only return restrooms that have been updated since the given date.",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "day",
+            "in": "query",
+            "description": "Only return restrooms that have been updated on the given day.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "Only return restrooms that have been updated on the given month.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "year",
+            "in": "query",
+            "description": "Only return restrooms that have been updated on the given year.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "default": 2023
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restrooms/by_location.json": {
+      "get": {
+        "operationId": "getRestroomsByLocation",
+        "summary": "Get all restrooms by location",
+        "description": "Returns all restrooms by location",
+        "tags": ["Restrooms"],
+        "parameters": [
+          { "$ref": "#/components/parameters/Page" },
+          { "$ref": "#/components/parameters/PerPage" },
+          { "$ref": "#/components/parameters/Offset" },
+          { "$ref": "#/components/parameters/Ada" },
+          { "$ref": "#/components/parameters/Unisex" },
+          {
+            "name": "lat",
+            "in": "query",
+            "description": "Only return restrooms that are within the given latitude.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "description": "Only return restrooms that are within the given longitude.",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/restrooms/search.json": {
+      "get": {
+        "operationId": "getRestroomsBySearch",
+        "summary": "Get all restrooms by search",
+        "description": "Returns all restrooms by search",
+        "tags": ["Restrooms"],
+        "parameters": [
+          { "$ref": "#/components/parameters/Page" },
+          { "$ref": "#/components/parameters/PerPage" },
+          { "$ref": "#/components/parameters/Offset" },
+          { "$ref": "#/components/parameters/Ada" },
+          { "$ref": "#/components/parameters/Unisex" },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Only return restrooms that match the given query.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "parameters": {
+      "Page": {
+        "name": "page",
+        "in": "query",
+        "description": "Page offset to fetch.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 1
+        }
+      },
+      "PerPage": {
+        "name": "per_page",
+        "in": "query",
+        "description": "Number of results to return per page.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 30
+        }
+      },
+      "Offset": {
+        "name": "offset",
+        "in": "query",
+        "description": "Pad a number of results.",
+        "required": false,
+        "schema": {
+          "type": "integer",
+          "default": 0
+        }
+      },
+      "Ada": {
+        "name": "ada",
+        "in": "query",
+        "description": "Only return restrooms that are ADA accessible.",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "Unisex": {
+        "name": "unisex",
+        "in": "query",
+        "description": "Only return restrooms that are unisex.",
+        "required": false,
+        "schema": {
+          "type": "boolean",
+          "default": false
+        }
+      }
+    }
+  }
+}

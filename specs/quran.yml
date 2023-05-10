@@ -1,0 +1,348 @@
+swagger: "2.0"
+info:
+  version: v4
+  title: Quran.com API
+  description: " Documentation of Quran.com v4 API"
+  contact:
+    name: Quran.com
+    url: "https://quran.com"
+host: api.quran.com
+basePath: /api/v4
+schemes:
+  - https
+  - http
+produces:
+  - application/json
+paths:
+  "/chapters":
+    get:
+      operationId: Chapters
+      summary: List Chapters
+      tags:
+        - Chapters
+      description: "Get list of #model:aC7ed7aoTAZEKLCGF."
+
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: object
+            properties:
+              chapters:
+                type: array
+                items: {}
+
+  "/chapters/{id}":
+    parameters:
+      - name: id
+        in: path
+        description: Chapter ID ( 1-114)
+        required: true
+        type: integer
+        minimum: 1
+        maximum: 114
+    get:
+      operationId: ChaptersById
+      summary: Get Chapter
+      tags:
+        - Chapters
+      description: "Get details of a single #model:aC7ed7aoTAZEKLCGF."
+
+      responses:
+        "200":
+          description: ""
+
+  "/verses/by_chapter/{chapter_number}":
+    parameters:
+      - name: chapter_number
+        in: path
+        description: Chapter number ( 1  - 114 )
+        required: true
+        type: integer
+        minimum: 1
+        maximum: 114
+    get:
+      operationId: VersesByChapterNumber
+      summary: By Chapter
+      tags:
+        - Verses
+      description: "Get list of #model:J83wDRc48FrARPHBY(s) by Chapter / Surah number."
+      parameters:
+        - name: words
+          in: query
+          description: |-
+            Include words of each ayah?
+
+            0 or false will not include words.
+
+            1 or true will include the words.
+          type: string
+          default: "true"
+          enum:
+            - "true"
+            - "false"
+
+        - name: page
+          in: query
+          description: For paginating within the result
+          type: integer
+          default: 1
+        - name: per_page
+          in: query
+          description: "records per api call, you can get maximum 50 records. "
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 50
+      responses:
+        "200":
+          description: ""
+
+  "/verses/by_page/{page_number}":
+    parameters:
+      - name: page_number
+        in: path
+        description: "Madani Mushaf page number. Valid range is 1-604 "
+        required: true
+        type: integer
+        minimum: 1
+        exclusiveMinimum: true
+        maximum: 604
+        exclusiveMaximum: false
+    get:
+      operationId: VersesByPageNumber
+      summary: By Page
+      tags:
+        - Verses
+      description: Get all verses of a specific Madani Mushaf page(1 to 604)
+      parameters:
+        - name: words
+          in: query
+          description: |-
+            Include words of each ayah?
+
+            0 or false will not include words.
+
+            1 or true will include the words.
+          type: string
+          default: "true"
+          enum:
+            - "true"
+            - "false"
+
+        - name: page
+          in: query
+          description: For paginating within the result
+          type: integer
+          default: 1
+        - name: per_page
+          in: query
+          description: "records per api call, you can get maximum 50 records. "
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 50
+      responses:
+        "200":
+          description: ""
+
+  "/verses/by_juz/{juz_number}":
+    parameters:
+      - name: juz_number
+        in: path
+        required: true
+        type: integer
+        minimum: 1
+        maximum: 30
+    get:
+      operationId: VersesByJuzNumber
+      summary: By Juz
+      tags:
+        - Verses
+      description: Get all verses from a specific juz(1-30).
+      parameters:
+        - name: words
+          in: query
+          description: |-
+            Include words of each ayah?
+
+            0 or false will not include words.
+
+            1 or true will include the words.
+          type: string
+          default: "true"
+          enum:
+            - "true"
+            - "false"
+
+        - name: page
+          in: query
+          description: For paginating within the result
+          type: integer
+          default: 1
+        - name: per_page
+          in: query
+          description: "records per api call, you can get maximum 50 records. "
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 50
+      responses:
+        "200":
+          description: ""
+
+  "/verses/by_hizb/{hizb_number}":
+    parameters:
+      - name: hizb_number
+        in: path
+        description: Hizb number(1-60)
+        required: true
+        type: integer
+        minimum: 1
+        maximum: 60
+    get:
+      operationId: VersesByHizbNumber
+      summary: By Hizb number
+      tags:
+        - Verses
+      description: Get all verses from a specific Hizb( half(1-60).
+      parameters:
+        - name: words
+          in: query
+          description: |-
+            Include words of each ayah?
+
+            0 or false will not include words.
+
+            1 or true will include the words.
+          type: string
+          default: "true"
+          enum:
+            - "true"
+            - "false"
+
+        - name: page
+          in: query
+          description: For paginating within the result
+          type: integer
+          default: 1
+        - name: per_page
+          in: query
+          description: "records per api call, you can get maximum 50 records. "
+          type: integer
+          default: 10
+          minimum: 1
+          maximum: 50
+      responses:
+        "200":
+          description: ""
+
+  "/verses/by_key/{verse_key}":
+    parameters:
+      - name: verse_key
+        in: path
+        description: "Verse key ( chapter:verse) "
+        required: true
+        type: string
+    get:
+      operationId: VersesByVerseKey
+      summary: By Specific Verse By Key
+      tags:
+        - Verses
+      description: |-
+        Get a specific ayah with key. Key is combination of surah number and ayah number. 1:1 is first ayah offirst surah for exampke.
+
+        10:5 is 5th ayah of 10th surah.
+      parameters:
+        - name: words
+          in: query
+          description: |-
+            Include words of each ayah?
+
+            0 or false will not include words.
+
+            1 or true will include the words.
+          type: string
+          default: "true"
+          enum:
+            - "true"
+            - "false"
+
+      responses:
+        "200":
+          description: ""
+
+  "/verses/random":
+    get:
+      operationId: RandomVerses
+      summary: Get random ayah
+      tags:
+        - Verses
+      description: "Get a random verse. You can get random verse by `chapter`,`page`, `juz`, `hizb`, `rub el hizb`, `ruku`, `manzil` number, or from whole Quran."
+      parameters:
+        - name: words
+          in: query
+          description: |-
+            Include words of each ayah?
+
+            0 or false will not include words.
+
+            1 or true will include the words.
+          type: string
+          default: "true"
+          enum:
+            - "true"
+            - "false"
+
+      responses:
+        "200":
+          description: ""
+
+  "/juzs":
+    get:
+      operationId: Juzs
+      summary: Get All Juzs
+      tags:
+        - Juz
+      description: "Get list of all #model:XwogxNra8JdvchxBE"
+      responses:
+        "200":
+          description: ""
+
+  "/search":
+    get:
+      operationId: GET_search
+      tags:
+        - Search
+      consumes:
+        - application/json
+      description: "Search query, you can use *query* as well"
+      parameters:
+        - name: q
+          in: query
+          description: "Search query, you can use *query* as well"
+          type: string
+        - name: size
+          in: query
+          description: Results per page. *s* is also valid parameter.
+          type: number
+          default: 20
+        - name: page
+          in: query
+          description: "Page number, well for pagination. You can use *p* as well"
+          type: number
+          default: 0
+
+      responses:
+        "200":
+          description: ""
+
+tags:
+  - name: Search
+    description: Search
+  - name: Chapters
+    description: Chapters
+  - name: Verses
+    description: Verses
+  - name: Juz
+    description: Juz
