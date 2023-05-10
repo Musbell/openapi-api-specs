@@ -159,25 +159,25 @@
           {
             "$ref": "#/components/parameters/date"
           },
-           {
-             "$ref": "#/components/parameters/startdate"
-           },
-            {
-              "$ref": "#/components/parameters/enddate"
-            },
-            {
-              "$ref": "#/components/parameters/qualifier"
-            },
-             {
-               "$ref": "#/components/parameters/stationReference"
-             },
-           
-               {
-                 "$ref": "#/components/parameters/_view"
-               },
-               {
-                 "$ref": "#/components/parameters/_sorted"
-               }
+          {
+            "$ref": "#/components/parameters/startdate"
+          },
+          {
+            "$ref": "#/components/parameters/enddate"
+          },
+          {
+            "$ref": "#/components/parameters/qualifier"
+          },
+          {
+            "$ref": "#/components/parameters/stationReference"
+          },
+
+          {
+            "$ref": "#/components/parameters/_view"
+          },
+          {
+            "$ref": "#/components/parameters/_sorted"
+          }
         ],
         "responses": {
           "200": {
@@ -200,8 +200,7 @@
         "operationId": "getRainfallReadings",
         "parameters": [
           {
-            "$ref": "#/components/parameters/station_in_query",
-            
+            "$ref": "#/components/parameters/station_in_query"
           },
           {
             "$ref": "#/components/parameters/_limit"
@@ -211,6 +210,33 @@
           },
           {
             "$ref": "#/components/parameters/parameter"
+          },
+          {
+            "$ref": "#/components/parameters/latest"
+          },
+          {
+            "$ref": "#/components/parameters/today"
+          },
+          {
+            "$ref": "#/components/parameters/date"
+          },
+          {
+            "$ref": "#/components/parameters/startdate"
+          },
+          {
+            "$ref": "#/components/parameters/enddate"
+          },
+          {
+            "$ref": "#/components/parameters/qualifier"
+          },
+          {
+            "$ref": "#/components/parameters/stationReference"
+          },
+          {
+            "$ref": "#/components/parameters/_view"
+          },
+          {
+            "$ref": "#/components/parameters/_sorted"
           }
         ],
         "responses": {
@@ -250,6 +276,30 @@
           },
           {
             "$ref": "#/components/parameters/parameter"
+          },
+          {
+            "$ref": "#/components/parameters/latest"
+          },
+          {
+            "$ref": "#/components/parameters/today"
+          },
+          {
+            "$ref": "#/components/parameters/date"
+          },
+          {
+            "$ref": "#/components/parameters/startdate"
+          },
+          {
+            "$ref": "#/components/parameters/enddate"
+          },
+          {
+            "$ref": "#/components/parameters/since"
+          },
+          {
+            "$ref": "#/components/parameters/_view"
+          },
+          {
+            "$ref": "#/components/parameters/_sorted"
           }
         ],
         "responses": {
@@ -283,6 +333,39 @@
           },
           {
             "$ref": "#/components/parameters/_offset"
+          },
+        {
+             "$ref": "#/components/parameters/_limit"
+          },
+          {
+            "$ref": "#/components/parameters/_offset"
+          },
+          {
+            "$ref": "#/components/parameters/parameter"
+          },
+          {
+            "$ref": "#/components/parameters/latest"
+          },
+          {
+            "$ref": "#/components/parameters/today"
+          },
+          {
+            "$ref": "#/components/parameters/date"
+          },
+          {
+            "$ref": "#/components/parameters/startdate"
+          },
+          {
+            "$ref": "#/components/parameters/enddate"
+          },
+          {
+            "$ref": "#/components/parameters/since"
+          },
+          {
+            "$ref": "#/components/parameters/_view"
+          },
+          {
+            "$ref": "#/components/parameters/_sorted"
           }
         ],
         "responses": {
@@ -401,7 +484,7 @@
           "type": "string"
         }
       },
-        "station_in_query": {
+      "station_in_query": {
         "name": "station",
         "in": "query",
         "description": "The URI of the monitoring station supplying the measure",
