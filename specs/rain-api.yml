@@ -6,30 +6,30 @@ info:
         
         The Rainfall API offers real-time access to rainfall data from ~1000 telemetric rain gauges, with 15-minute accumulated totals updated once or twice daily.
         
-        | Parameter      | Description | 
-        | ---------------- | ------------|
-        | parameter              | Parameter to filter by     | 
-        |  _limit              | Limit the number of results returned| 
-        |   _offset              |Offset the results returned| 
-        |   _view              |View to return| 
-        |   _sorted              | Sort the results returned| 
-        |   qualifier              |  A qualifier for the quantity being measured - 'Tipping Bucket Raingauge'| 
-        |   parameterName              | The name of the quantity being measured - 'Rainfall'| 
-        |   station (in PATH)              |Station to return measurements for| 
-        |   station (in QUERY)            |The URI of the monitoring station supplying the measure| 
-        |   label             |This query retrieves stations with a specific exact label.| 
-        |   stationReference             |This query fetches stations from the Environment Agency database that match a specific internal reference identifier.| 
-        |   RLOIid             |This query retrieves the station with a specific River Levels on the Internet identifier (RLOIid).| 
-        |   search             |This query retrieves stations with a label that contains a specific term.| 
-        |   lat             | Latitude of the station, in WGS84 coordinate ref, rounded to 100m grid| 
-        |   long             |Longitude of the station, in WGS84 coordinate ref, rounded to 100m grid| 
-        |   dist             | This query returns stations within a certain distance (in km) of a specified latitude/longitude (WGS84 coordinates), approximated by a bounding box. The distance must be an integer.| 
-        |   latest             | Return only the most recently available reading for each included measure. Include 'latest' in the query for true| 
-        |   today             |Return all the readings taken today for each included measure. Include 'today' in the query for true| 
-        |   date             |Return all the readings taken on the specified day for each included measure.| 
-        |   startdate             | Return all the readings taken on or after the specified date for each included measure.| 
-        |   enddate             |Return all the readings taken on or before the specified date for each included measure.| 
-        |   since             |Return all the readings taken since the specified date for each included measure.| 
+        | Parameter                 | Description | 
+        | ------------------------- | ------------|
+        | parameter                 | Parameter to filter by     | 
+        |  _limit                   | Limit the number of results returned| 
+        |   _offset                 |Offset the results returned| 
+        |   _view                   |View to return| 
+        |   _sorted                 | Sort the results returned| 
+        |   qualifier               |A qualifier for the quantity being measured - 'Tipping Bucket Raingauge'| 
+        |   parameterName           |The name of the quantity being measured - 'Rainfall'| 
+        |   station (in PATH)       |Station to return measurements for| 
+        |   station (in QUERY)      |The URI of the monitoring station supplying the measure| 
+        |   label                   |This query retrieves stations with a specific exact label.| 
+        |   stationReference        |This query fetches stations from the Environment Agency database that match a specific internal reference identifier.| 
+        |   RLOIid                  |This query retrieves the station with a specific River Levels on the Internet identifier (RLOIid).| 
+        |   search                  |This query retrieves stations with a label that contains a specific term.| 
+        |   lat                     |Latitude of the station, in WGS84 coordinate ref, rounded to 100m grid| 
+        |   long                    |Longitude of the station, in WGS84 coordinate ref, rounded to 100m grid| 
+        |   dist                    |This query returns stations within a certain distance (in km) of a specified latitude/longitude (WGS84 coordinates), approximated by a bounding box. The distance must be an integer.| 
+        |   latest                  |Return only the most recently available reading for each included measure. Include 'latest' in the query for true| 
+        |   today                   |Return all the readings taken today for each included measure. Include 'today' in the query for true| 
+        |   date                    |Return all the readings taken on the specified day for each included measure.| 
+        |   startdate               |Return all the readings taken on or after the specified date for each included measure.| 
+        |   enddate                 |Return all the readings taken on or before the specified date for each included measure.| 
+        |   since                   |Return all the readings taken since the specified date for each included measure.| 
   contact:
     name: Department for Environment Food & Rural Affairs
     url: https://environment.data.gov.uk/
