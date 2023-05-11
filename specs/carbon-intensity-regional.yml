@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Carbon Intensity API - Regional
   description: |
-    The National Grid's Carbon Intensity API gives trends and data on carbon intensity from all major electricity generation sources in Great Britain. It presents both forecasted and actual carbon intensity data.
+    The National Grid's Carbon Intensity API gives trends and data on carbon intensity from all major electricity generation sources in Great Britain. It presents both forecasted and actual carbon intensity data. All times provided in UTC (+00:00)
 
 
     **Parameters**
@@ -21,7 +21,7 @@ info:
     | 3         | North West England|
     | 4         | North East England|
     | 5         | Yorkshire         |
-    | 6         | North Wales       |
+    | 6         | North Wales       | 
     | 7         | South Wales       |
     | 8         | West Midlands     |
     | 9         | East Midlands     |
@@ -161,7 +161,7 @@ paths:
       tags:
         - intensity
       summary: Get Carbon Intensity data for current half hour for specified postcode
-      description: Get Regional Carbon Intensity data for current half hour for specified postcode. All times provided in UTC (+00:00).
+      description: Get Regional Carbon Intensity data for current half hour for specified postcode.
       parameters:
         - name: postcode
           in: path
@@ -194,7 +194,7 @@ paths:
       tags:
         - intensity
       summary: Get Carbon Intensity data for current half hour for specified region
-      description: Get Regional Carbon Intensity data for current half hour for specified region. All times provided in UTC (+00:00).
+      description: Get Regional Carbon Intensity data for current half hour for specified region.
       parameters:
         - name: regionid
           in: path
@@ -227,7 +227,7 @@ paths:
       tags:
         - intensity
       summary: Get Carbon Intensity data for next 24h for GB regions
-      description: Get Regional Carbon Intensity data for next 24h. All times provided in UTC (+00:00).
+      description: Get Regional Carbon Intensity data for next 24h.
       parameters:
         - name: from
           in: path
@@ -260,7 +260,7 @@ paths:
       tags:
         - intensity
       summary: Get Carbon Intensity data for next 24h for specified postcode
-      description: Get Regional Carbon Intensity data for next 24h for specified postcode. All times provided in UTC (+00:00).
+      description: Get Regional Carbon Intensity data for next 24h for specified postcode.
       parameters:
         - name: from
           in: path
@@ -299,123 +299,12 @@ paths:
       tags:
         - intensity
       summary: Get Carbon Intensity data for next 24h for specified region
-      description: Get Regional Carbon Intensity data for next 24h for specified region. All times provided in UTC (+00:00).
+      description: Get Regional Carbon Intensity data for next 24h for specified region.
       parameters:
         - name: from
           in: path
           required: true
           description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
-          schema:
-            type: string
-            example: 2023-05-11
-        - name: regionid
-          in: path
-          required: true
-          schema:
-            type: string
-            example: 1
-      responses:
-        "200":
-          description: 200 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Intensity"
-        "400":
-          description: 400 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: 500 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /regional/intensity/{from}/fw48h:
-    get:
-      operationId: regionalIntensityFw48h
-      tags:
-        - intensity
-      summary: Get Carbon Intensity data for next 48h for GB regions
-      description: Get Regional Carbon Intensity data for next 48h. All times provided in UTC (+00:00).
-      parameters:
-        - name: from
-          in: path
-          required: true
-          schema:
-            type: string
-            example: 2023-05-11
-      responses:
-        "200":
-          description: 200 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Intensity"
-        "400":
-          description: 400 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: 500 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /regional/intensity/{from}/fw48h/postcode/{postcode}:
-    get:
-      operationId: regionalIntensityFw48hByPostcode
-      tags:
-        - intensity
-      summary: Get Carbon Intensity data for next 48h for specified postcode
-      description: Get Regional Carbon Intensity data for next 48h for specified postcode. All times provided in UTC (+00:00).
-      parameters:
-        - name: from
-          in: path
-          required: true
-          schema:
-            type: string
-            example: 2023-05-11
-        - name: postcode
-          in: path
-          required: true
-          schema:
-            type: string
-            example: RG41
-      responses:
-        "200":
-          description: 200 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Intensity"
-        "400":
-          description: 400 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-        "500":
-          description: 500 response
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/Error"
-  /regional/intensity/{from}/fw48h/regionid/{regionid}:
-    get:
-      operationId: regionalIntensityFw48hByRegionId
-      tags:
-        - intensity
-      summary: Get Carbon Intensity data for next 48h for specified region
-      description: Get Regional Carbon Intensity data for next 48h for specified region. All times provided in UTC (+00:00).
-      parameters:
-        - name: from
-          in: path
-          required: true
           schema:
             type: string
             example: 2023-05-11
