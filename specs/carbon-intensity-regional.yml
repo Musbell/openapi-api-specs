@@ -2,16 +2,15 @@ openapi: 3.0.0
 info:
   title: Carbon Intensity API - Regional
   description: |
-    The National Grid's Carbon Intensity API gives trends and data on carbon intensity from all major electricity generation sources in Great Britain. It presents both forecasted and actual carbon intensity data. All times provided in UTC (+00:00)
-
+    The National Grid's Carbon Intensity API gives trends and data on carbon intensity from all major electricity generation sources in Great Britain. It presents both forecasted and actual carbon intensity data.
 
     **Parameters**
     | Parameter | Description |
     |-----------|-------------|
     | postcode  | Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.|
     | regionid  | Region ID of GB region. See list of Region IDs|
-    | from      | Starting datetime for a given operation or query in ISO8601 format, which includes the year (YYYY), month (MM), day (DD), hour (hh), minute (mm), and timezone offset (Z) from UTC time.|
-    | to        | Ending datetime for a given operation or query in ISO8601 format, which includes the year (YYYY), month (MM), day (DD), hour (hh), minute (mm), and timezone offset (Z) from UTC time.|
+    | from      | Specifies the start time for an operation or query in ISO8601 format.|
+    | to        | Defines the end time for an operation or query in ISO8601 format.|
 
     **Region IDs**
     | Region ID | Short name        |
