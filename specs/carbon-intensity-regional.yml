@@ -56,6 +56,7 @@ paths:
       operationId: regionalIntensity
       tags:
         - intensity
+      summary: Get Carbon Intensity data for current half hour for GB regions
       description: Get Regional Carbon Intensity data for current half hour. All times provided in UTC (+00:00).
       responses:
         "200":
@@ -81,6 +82,7 @@ paths:
       operationId: regionalIntensityEngland
       tags:
         - intensity
+      summary: Get Carbon Intensity data for current half hour for England
       description: Get Carbon Intensity data for current half hour for England. All times provided in UTC (+00:00).
       responses:
         "200":
@@ -106,6 +108,7 @@ paths:
       operationId: regionalIntensityScotland
       tags:
         - intensity
+      summary: Get Carbon Intensity data for current half hour for Scotland
       description: Get Carbon Intensity data for current half hour for Scotland. All times provided in UTC (+00:00).
       responses:
         "200":
@@ -131,6 +134,7 @@ paths:
       operationId: regionalIntensityWales
       tags:
         - intensity
+      summary: Get Carbon Intensity data for current half hour for Wales
       description: Get Carbon Intensity data for current half hour for Wales. All times provided in UTC (+00:00).
       responses:
         "200":
@@ -156,6 +160,7 @@ paths:
       operationId: regionalIntensityByPostcode
       tags:
         - intensity
+      summary: Get Carbon Intensity data for current half hour for specified postcode
       description: Get Regional Carbon Intensity data for current half hour for specified postcode. All times provided in UTC (+00:00).
       parameters:
         - name: postcode
@@ -188,6 +193,7 @@ paths:
       operationId: regionalIntensityByRegionId
       tags:
         - intensity
+      summary: Get Carbon Intensity data for current half hour for specified region
       description: Get Regional Carbon Intensity data for current half hour for specified region. All times provided in UTC (+00:00).
       parameters:
         - name: regionid
@@ -220,6 +226,7 @@ paths:
       operationId: regionalIntensityFw24h
       tags:
         - intensity
+      summary: Get Carbon Intensity data for next 24h for GB regions
       description: Get Regional Carbon Intensity data for next 24h. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -252,6 +259,7 @@ paths:
       operationId: regionalIntensityFw24hByPostcode
       tags:
         - intensity
+      summary: Get Carbon Intensity data for next 24h for specified postcode
       description: Get Regional Carbon Intensity data for next 24h for specified postcode. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -290,6 +298,7 @@ paths:
       operationId: regionalIntensityFw24hByRegionId
       tags:
         - intensity
+      summary: Get Carbon Intensity data for next 24h for specified region
       description: Get Regional Carbon Intensity data for next 24h for specified region. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -329,6 +338,7 @@ paths:
       operationId: regionalIntensityFw48h
       tags:
         - intensity
+      summary: Get Carbon Intensity data for next 48h for GB regions
       description: Get Regional Carbon Intensity data for next 48h. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -361,6 +371,7 @@ paths:
       operationId: regionalIntensityFw48hByPostcode
       tags:
         - intensity
+      summary: Get Carbon Intensity data for next 48h for specified postcode
       description: Get Regional Carbon Intensity data for next 48h for specified postcode. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -399,6 +410,7 @@ paths:
       operationId: regionalIntensityFw48hByRegionId
       tags:
         - intensity
+      summary: Get Carbon Intensity data for next 48h for specified region
       description: Get Regional Carbon Intensity data for next 48h for specified region. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -437,6 +449,7 @@ paths:
       operationId: regionalIntensityPt24h
       tags:
         - intensity
+      summary: Get Carbon Intensity data for past 24h for GB regions
       description: Get Regional Carbon Intensity data for past 24h. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -469,6 +482,7 @@ paths:
       operationId: regionalIntensityPt24hByPostcode
       tags:
         - intensity
+      summary: Get Carbon Intensity data for past 24h for specified postcode
       description: Get Regional Carbon Intensity data for past 24h for specified postcode. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -507,6 +521,7 @@ paths:
       operationId: regionalIntensityPt24hByRegionId
       tags:
         - intensity
+      summary: Get Carbon Intensity data for past 24h for specified region
       description: Get Regional Carbon Intensity data for past 24h for specified region. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -545,6 +560,7 @@ paths:
       operationId: regionalIntensityFromTo
       tags:
         - intensity
+      summary: Get Carbon Intensity data between specified datetimes for GB regions
       description: Get Regional Carbon Intensity data between specified datetimes. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -583,6 +599,7 @@ paths:
       operationId: regionalIntensityFromToByPostcode
       tags:
         - intensity
+      summary: Get Carbon Intensity data between specified datetimes for specified postcode
       description: Get Regional Carbon Intensity data between specified datetimes for specified postcode. All times provided in UTC (+00:00).
       parameters:
         - name: from
@@ -627,6 +644,7 @@ paths:
       operationId: regionalIntensityFromToByRegionId
       tags:
         - intensity
+      summary: Get Carbon Intensity data between specified datetimes for specified region
       description: Get Regional Carbon Intensity data between specified datetimes for specified region. All times provided in UTC (+00:00).
       parameters:
         - name: from
