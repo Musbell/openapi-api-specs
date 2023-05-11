@@ -1,10 +1,38 @@
 openapi: 3.0.0
 info:
-  title: Carbon Intensity API
-  description: |-
-    "National Grid's Carbon Intensity API provides an indicative trend of regional carbon intensity of the electricity system in Great Britain (GB) up to 2 days ahead of real-time. It provides programmatic and timely access to both forecast and estimated carbon intensity data. The Carbon Intensity forecast includes CO2 emissions related to electricity generation only. The includes emissions from all large metered power stations, interconnector imports, transmission and distribution losses, and accounts for national electricity demand, embedded wind and solar generation."
-    "The from parameter specifies the starting datetime for a given operation or query in ISO8601 format, which includes the year (YYYY), month (MM), day (DD), hour (hh), minute (mm), and timezone offset (Z) from UTC time."
-    
+  title: Carbon Intensity API - Regional
+  description: |
+    National Grid's Carbon Intensity API provides an indicative trend of regional carbon intensity of the electricity system in Great Britain (GB) up to 2 days ahead of real-time. It provides programmatic and timely access to both forecast and estimated carbon intensity data. The Carbon Intensity forecast includes CO2 emissions related to electricity generation only. The includes emissions from all large metered power stations, interconnector imports, transmission and distribution losses, and accounts for national electricity demand, embedded wind and solar generation.
+
+
+    **Parameters**
+    | Parameter | Description |
+    |-----------|-------------|
+    | postcode  | Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.|
+    | regionid  | Region ID of GB region. See list of Region IDs|
+    | from      | Starting datetime for a given operation or query in ISO8601 format, which includes the year (YYYY), month (MM), day (DD), hour (hh), minute (mm), and timezone offset (Z) from UTC time.|
+    | to        | Ending datetime for a given operation or query in ISO8601 format, which includes the year (YYYY), month (MM), day (DD), hour (hh), minute (mm), and timezone offset (Z) from UTC time.|
+
+    **Region IDs**
+    | Region ID | Short name        |
+    |-----------|-------------------|
+    | 1         | North Scotland    |
+    | 2         | South Scotland    |
+    | 3         | North West England|
+    | 4         | North East England|
+    | 5         | Yorkshire         |
+    | 6         | North Wales       |
+    | 7         | South Wales       |
+    | 8         | West Midlands     |
+    | 9         | East Midlands     |
+    | 10        | East England      |
+    | 11        | South West England|
+    | 12        | South England     |
+    | 13        | London            |
+    | 14        | South East England|
+    | 15        | England           |
+    | 16        | Scotland          |
+    | 17        | Wales             |
   contact:
     name: National Grid
     email: alasdair.bruce@nationalgrid.com
@@ -31,24 +59,24 @@ paths:
       summary: Get Carbon Intensity data for current half hour for GB regions
       description: Get Regional Carbon Intensity data for current half hour. All times provided in UTC (+00:00).
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
-        '400':
+                $ref: "#/components/schemas/Intensity"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/england:
     get:
       operationId: regionalIntensityEngland
@@ -57,24 +85,24 @@ paths:
       summary: Get Carbon Intensity data for current half hour for England
       description: Get Carbon Intensity data for current half hour for England. All times provided in UTC (+00:00).
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
-        '400':
+                $ref: "#/components/schemas/Intensity"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/scotland:
     get:
       operationId: regionalIntensityScotland
@@ -83,24 +111,24 @@ paths:
       summary: Get Carbon Intensity data for current half hour for Scotland
       description: Get Carbon Intensity data for current half hour for Scotland. All times provided in UTC (+00:00).
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
-        '400':
+                $ref: "#/components/schemas/Intensity"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/wales:
     get:
       operationId: regionalIntensityWales
@@ -109,24 +137,24 @@ paths:
       summary: Get Carbon Intensity data for current half hour for Wales
       description: Get Carbon Intensity data for current half hour for Wales. All times provided in UTC (+00:00).
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
-        '400':
+                $ref: "#/components/schemas/Intensity"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/postcode/{postcode}:
     get:
       operationId: regionalIntensityByPostcode
@@ -137,30 +165,29 @@ paths:
       parameters:
         - name: postcode
           in: path
-          description: Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.
           required: true
           schema:
             type: string
             example: RG41
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
-        '400':
+                $ref: "#/components/schemas/Intensity"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/regionid/{regionid}:
     get:
       operationId: regionalIntensityByRegionId
@@ -171,49 +198,29 @@ paths:
       parameters:
         - name: regionid
           in: path
-          description: Region ID of GB region. See list of Region IDs
           required: true
           schema:
             type: string
-            enum: [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12.
-              13,
-              14,
-              15,
-              16,
-              17
-            ]
             example: 1
       responses:
-        '200':
+        "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
-        '400':
+                $ref: "#/components/schemas/Intensity"
+        "400":
           description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/fw24h:
     get:
       operationId: regionalIntensityFw24h
@@ -225,29 +232,28 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
       responses:
         "200":
           description: 200 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/fw24h/postcode/{postcode}:
     get:
       operationId: regionalIntensityFw24hByPostcode
@@ -259,13 +265,11 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
         - name: postcode
           in: path
-          description: Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.
           required: true
           schema:
             type: string
@@ -276,19 +280,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/fw24h/regionid/{regionid}:
     get:
       operationId: regionalIntensityFw24hByRegionId
@@ -303,32 +307,12 @@ paths:
           description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
         - name: regionid
           in: path
-          description: Region ID of GB region. See list of Region IDs
           required: true
           schema:
             type: string
-            enum: [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12.
-              13,
-              14,
-              15,
-              16,
-              17
-            ]
             example: 1
       responses:
         "200":
@@ -336,19 +320,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/fw48h:
     get:
       operationId: regionalIntensityFw48h
@@ -360,29 +344,28 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
       responses:
         "200":
           description: 200 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/fw48h/postcode/{postcode}:
     get:
       operationId: regionalIntensityFw48hByPostcode
@@ -394,13 +377,11 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
         - name: postcode
           in: path
-          description: Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.
           required: true
           schema:
             type: string
@@ -411,19 +392,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/fw48h/regionid/{regionid}:
     get:
       operationId: regionalIntensityFw48hByRegionId
@@ -435,35 +416,14 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
         - name: regionid
           in: path
-          description: Region ID of GB region. See list of Region IDs
           required: true
           schema:
             type: string
-            enum: [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12.
-              13,
-              14,
-              15,
-              16,
-              17
-            ]
             example: 1
       responses:
         "200":
@@ -471,19 +431,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/pt24h:
     get:
       operationId: regionalIntensityPt24h
@@ -495,29 +455,28 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
       responses:
         "200":
           description: 200 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/pt24h/postcode/{postcode}:
     get:
       operationId: regionalIntensityPt24hByPostcode
@@ -529,13 +488,11 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
         - name: postcode
           in: path
-          description: Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.
           required: true
           schema:
             type: string
@@ -546,19 +503,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/pt24h/regionid/{regionid}:
     get:
       operationId: regionalIntensityPt24hByRegionId
@@ -570,35 +527,14 @@ paths:
         - name: from
           in: path
           required: true
-          description: Datetime in in ISO8601 format YYYY-MM-DDThh:mmZ e.g. 2017-08-25T12:35Z
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example: 2023-05-11
         - name: regionid
           in: path
-          description: Region ID of GB region. See list of Region IDs
           required: true
           schema:
             type: string
-            enum: [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12.
-              13,
-              14,
-              15,
-              16,
-              17
-            ]
             example: 1
       responses:
         "200":
@@ -606,19 +542,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/{to}:
     get:
       operationId: regionalIntensityFromTo
@@ -630,36 +566,34 @@ paths:
         - name: from
           in: path
           required: true
-          description: Get Regional Carbon Intensity data between specified datetimes. All times provided in UTC (+00:00).
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example:  2023-05-01
         - name: to
           in: path
           required: true
-          description: Get Regional Carbon Intensity data between specified datetimes. All times provided in UTC (+00:00).
           schema:
             type: string
-            example: 2023-01-26T12:35Z
+            example:  2023-05-11
       responses:
         "200":
           description: 200 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/{to}/postcode/{postcode}:
     get:
       operationId: regionalIntensityFromToByPostcode
@@ -671,18 +605,17 @@ paths:
         - name: from
           in: path
           required: true
-          schema: 
+          schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example:  2023-05-01
         - name: to
           in: path
           required: true
           schema:
             type: string
-            example: 2023-01-26T12:35Z
+            example: 2023-05-11
         - name: postcode
           in: path
-          description: Outward postcode i.e. RG41 or SW1 or TF8. Do not include full postcode, outward postcode only.
           required: true
           schema:
             type: string
@@ -693,19 +626,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
   /regional/intensity/{from}/{to}/regionid/{regionid}:
     get:
       operationId: regionalIntensityFromToByRegionId
@@ -719,38 +652,18 @@ paths:
           required: true
           schema:
             type: string
-            example: 2023-01-25T12:35Z
+            example:  2023-05-01
         - name: to
           in: path
           required: true
           schema:
             type: string
-            example: 2023-01-26T12:35Z
+            example:  2023-05-11
         - name: regionid
           in: path
-          description: Region ID of GB region. See list of Region IDs
           required: true
           schema:
             type: string
-            enum: [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12.
-              13,
-              14,
-              15,
-              16,
-              17
-            ]
             example: 1
       responses:
         "200":
@@ -758,19 +671,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Intensity'
+                $ref: "#/components/schemas/Intensity"
         "400":
           description: 400 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
         "500":
           description: 500 response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 components:
   schemas:
     Intensity:
