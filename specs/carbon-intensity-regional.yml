@@ -2,7 +2,7 @@ openapi: 3.0.0
 info:
   title: Carbon Intensity API - Regional
   description: |
-    National Grid's Carbon Intensity API provides an indicative trend of regional carbon intensity of the electricity system in Great Britain (GB) up to 2 days ahead of real-time. It provides programmatic and timely access to both forecast and estimated carbon intensity data. The Carbon Intensity forecast includes CO2 emissions related to electricity generation only. The includes emissions from all large metered power stations, interconnector imports, transmission and distribution losses, and accounts for national electricity demand, embedded wind and solar generation.
+    The National Grid's Carbon Intensity API offers an indicative trend of GB's regional electricity system's carbon intensity, providing access to forecasted and estimated carbon intensity data. It includes CO2 emissions from all significant sources related to electricity generation.
 
 
     **Parameters**
