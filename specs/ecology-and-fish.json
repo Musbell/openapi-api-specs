@@ -1,55 +1,53 @@
 {
-  "swagger": "2.0",
-  "x-id": ["reitit.swagger/default"],
+  "openapi": "3.0.0",
   "info": {
     "title": "Environment Agency Ecology and Fish Data API",
     "description": "The Ecology and Fish Data API offers access to the Environment Agency's data on freshwater fish and ecology surveys. It harmonizes diverse data sources for consistent querying and requires specific filters due to the vast amount of data available.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "https://environment.data.gov.uk",
+      "description": "Environment Agency"
+    }
+  ],
   "paths": {
     "/ecology/api/v1/observations": {
       "get": {
-        "responses": {
-          "default": {
-            "description": ""
+         "responses": {
+          "200": {
+            "description": "OK"
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": false,
-            "default": 0,
-            "format": "int32"
+            "schema":{
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
+           
             "required": false,
-            "default": 250,
-            "format": "int32"
+           
+            "schema":{
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           },
           {
             "in": "query",
             "name": "type_id",
             "description": "",
-            "type": "string",
             "required": false,
             "x-anyOf": [
               {
@@ -58,13 +56,16 @@
               {
                 "type": "array"
               }
-            ]
+            ],
+            "schema": {
+              "type": "string"
+
+            }
           },
           {
             "in": "query",
             "name": "site_id",
             "description": "",
-            "type": "string",
             "required": false,
             "x-anyOf": [
               {
@@ -73,13 +74,15 @@
               {
                 "type": "array"
               }
-            ]
+            ],
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "property_id",
             "description": "",
-            "type": "string",
             "required": false,
             "x-anyOf": [
               {
@@ -88,13 +91,15 @@
               {
                 "type": "array"
               }
-            ]
+            ],
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "ultimate_foi_id",
             "description": "",
-            "type": "string",
             "required": false,
             "x-anyOf": [
               {
@@ -103,23 +108,30 @@
               {
                 "type": "array"
               }
-            ]
+            ],
+            "schema": {
+              "type": "string"
+            }
           },
           {
             "in": "query",
             "name": "date_to",
             "description": "",
-            "type": "string",
             "required": false,
-            "default": "2023-05-11"
+            "schema": {
+              "type": "string",
+              "default": "2023-05-11"
+            }
           },
           {
             "in": "query",
             "name": "date_from",
             "description": "",
-            "type": "string",
             "required": false,
-            "default": "1960-01-01"
+            "schema":{
+                "type": "string",
+                "default": "1960-01-01"
+            }
           }
         ],
         "summary": "Get observations. Filterable by one or more: type of observation, site, observable property, ultimate feature of interest",
@@ -134,44 +146,38 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 0,
-            "format": "int32"
+            "schema":{
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 250,
-            "format": "int32"
+            "schema":{
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           },
           {
             "in": "query",
             "name": "mode",
             "description": "",
-            "type": "string",
             "required": true,
-            "default": "minimal"
+            "schema":{
+                "type": "string",
+                "default": "minimal"
+            }
           },
           {
             "in": "query",
@@ -218,18 +224,6 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -251,18 +245,7 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
+
         "parameters": [
           {
             "in": "query",
@@ -351,18 +334,6 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -384,18 +355,6 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "query",
@@ -428,18 +387,6 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "query",
@@ -472,18 +419,6 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "query",
@@ -516,18 +451,6 @@
             "description": ""
           }
         },
-        "produces": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
-        "consumes": [
-          "application/json",
-          "application/transit+msgpack",
-          "application/transit+json",
-          "application/edn"
-        ],
         "parameters": [
           {
             "in": "query",
