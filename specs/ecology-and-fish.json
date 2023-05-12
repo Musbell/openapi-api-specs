@@ -1,0 +1,557 @@
+{
+  "swagger": "2.0",
+  "x-id": ["reitit.swagger/default"],
+  "info": {
+    "title": "Environment Agency Ecology and Fish Data API",
+    "description": "The Ecology and Fish Data API offers access to the Environment Agency's data on freshwater fish and ecology surveys. It harmonizes diverse data sources for consistent querying and requires specific filters due to the vast amount of data available.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/ecology/api/v1/observations": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": false,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": false,
+            "default": 250,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "type_id",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "x-anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "in": "query",
+            "name": "site_id",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "x-anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "in": "query",
+            "name": "property_id",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "x-anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "in": "query",
+            "name": "ultimate_foi_id",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "x-anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "in": "query",
+            "name": "date_to",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "default": "2023-05-11"
+          },
+          {
+            "in": "query",
+            "name": "date_from",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "default": "1960-01-01"
+          }
+        ],
+        "summary": "Get observations. Filterable by one or more: type of observation, site, observable property, ultimate feature of interest",
+        "description": "The Ecology API focuses on 'Observations', requiring at least one filter like site, property, observation type, or feature of interest. It can fetch specific metrics, site data, or observation types.",
+        "tags": ["observations"]
+      }
+    },
+    "/ecology/api/v1/sites": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 250,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "mode",
+            "description": "",
+            "type": "string",
+            "required": true,
+            "default": "minimal"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "",
+            "type": "string",
+            "required": false
+          },
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "",
+            "type": "number",
+            "required": false,
+            "format": "double"
+          },
+          {
+            "in": "query",
+            "name": "long",
+            "description": "",
+            "type": "number",
+            "required": false,
+            "format": "double"
+          },
+          {
+            "in": "query",
+            "name": "distance_km",
+            "description": "",
+            "type": "number",
+            "required": false,
+            "default": 5,
+            "format": "double"
+          }
+        ],
+        "summary": "Get sites",
+        "description": "The mode in the Ecology API can be minimal or props. You can fetch sites, sites within a certain distance from a coordinate, or sites with additional biosys information using mode=props.",
+        "tags": ["sites"]
+      }
+    },
+    "/ecology/api/v1/sites/{site-id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "site-id",
+            "description": "",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "summary": "Get site by ID",
+        "description": "Note that the site ID ends with the the numeric ID you'd recognise from the source data, but _preprended_ with ecology data site URL and `fish/` or `bio/` e.g. `http://environment.data.gov.uk/ecology/site/fish/10060`\n\nOnly a single site can be returned using this endpoint.\n\nExample queries:\n\n`/ecology/api/v1/sites/http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fsite%2Ffish%2F10060`",
+        "tags": ["sites"]
+      }
+    },
+    "/ecology/api/v1/surveys": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": false,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": false,
+            "default": 250,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "site_type",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "x-anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ]
+          },
+          {
+            "in": "query",
+            "name": "date_to",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "default": "2023-05-11"
+          },
+          {
+            "in": "query",
+            "name": "date_from",
+            "description": "",
+            "type": "string",
+            "required": false,
+            "default": "2016-01-01"
+          },
+          {
+            "in": "query",
+            "name": "lat",
+            "description": "",
+            "type": "number",
+            "required": false,
+            "format": "double"
+          },
+          {
+            "in": "query",
+            "name": "long",
+            "description": "",
+            "type": "number",
+            "required": false,
+            "format": "double"
+          },
+          {
+            "in": "query",
+            "name": "distance_km",
+            "description": "",
+            "type": "number",
+            "required": false,
+            "default": 5,
+            "format": "double"
+          }
+        ],
+        "summary": "Get surveys",
+        "description": "Retrieve a list of surveys for Biosys Marine sites or within a certain distance from a location using the Ecology API.",
+        "tags": ["surveys"]
+      }
+    },
+    "/ecology/api/v1/surveys/{survey-id}": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "survey-id",
+            "description": "",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "summary": "Get survey by ID",
+        "description": "This endpoint in the Ecology API fetches a single survey using a specific survey ID. The survey ID includes a familiar numeric ID from source data, but with an ecology data sampling URL and 'fish/' or 'bio/' prepended. Note that retrieving surveys with many results may require additional time.",
+        "tags": ["surveys"]
+      }
+    },
+    "/ecology/api/v1/properties": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 250,
+            "format": "int32"
+          }
+        ],
+        "summary": "Get all observable properties",
+        "description": "The /properties endpoint in the Ecology API provides a comprehensive list of all Observable Properties across all source datasets. It's used to fetch details about different properties observed in the datasets",
+        "tags": ["observable properties"]
+      }
+    },
+    "/ecology/api/v1/observation-types": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 250,
+            "format": "int32"
+          }
+        ],
+        "summary": "Get all observation types",
+        "description": "The /observation-types endpoint of the Ecology API lists all observation types in the data. Each observation is assigned a specific type based on its data domain, which can be used as a filter on the /observations endpoint.",
+        "tags": ["observation types"]
+      }
+    },
+    "/ecology/api/v1/taxa": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 250,
+            "format": "int32"
+          }
+        ],
+        "summary": "Get all taxa",
+        "description": "Example queries:\nGet a list of species\n`/ecology/api/v1/taxa?skip=0&take=250`\n",
+        "tags": ["features of interest"]
+      }
+    },
+    "/ecology/api/v1/species": {
+      "get": {
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "consumes": [
+          "application/json",
+          "application/transit+msgpack",
+          "application/transit+json",
+          "application/edn"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 0,
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "take",
+            "description": "",
+            "type": "integer",
+            "required": true,
+            "default": 250,
+            "format": "int32"
+          }
+        ],
+        "summary": "Get all species",
+        "description": "Example queries:\nGet a list of species\n`/ecology/api/v1/species?skip=0&take=250`\n",
+        "tags": ["features of interest"]
+      }
+    }
+  }
+}
