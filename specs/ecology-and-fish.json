@@ -264,25 +264,28 @@
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": false,
-            "default": 0,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
             "required": false,
-            "default": 250,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           },
           {
             "in": "query",
             "name": "site_type",
             "description": "",
-            "type": "string",
             "required": false,
             "x-anyOf": [
               {
@@ -291,48 +294,61 @@
               {
                 "type": "array"
               }
-            ]
+            ],
+            "schema": {
+                "type": "string",
+                "default": "fish"
+            }
           },
           {
             "in": "query",
             "name": "date_to",
             "description": "",
-            "type": "string",
             "required": false,
-            "default": "2023-05-11"
+            "schema": {
+                "type": "string",
+                "default": "2023-05-11"
+            }
           },
           {
             "in": "query",
             "name": "date_from",
             "description": "",
-            "type": "string",
             "required": false,
-            "default": "2016-01-01"
+            "schema": {
+                "type": "string",
+                "default": "2016-01-01"
+            }
           },
           {
             "in": "query",
             "name": "lat",
             "description": "",
-            "type": "number",
             "required": false,
-            "format": "double"
+            "schema": {
+                "type": "number",
+                "default": 51.5
+            }
           },
           {
             "in": "query",
             "name": "long",
             "description": "",
-            "type": "number",
             "required": false,
-            "format": "double"
+            "schema": {
+                "type": "number",
+                "default": 5
+            }
           },
           {
             "in": "query",
             "name": "distance_km",
             "description": "",
-            "type": "number",
             "required": false,
-            "default": 5,
-            "format": "double"
+            "schema": {
+                "type": "number",
+                "default": 5
+            }
           }
         ],
         "summary": "Get surveys",
@@ -352,8 +368,10 @@
             "in": "path",
             "name": "survey-id",
             "description": "",
-            "type": "string",
-            "required": true
+            "required": true,
+            "schema": {
+                "type": "string"
+            }
           }
         ],
         "summary": "Get survey by ID",
@@ -373,19 +391,23 @@
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 0,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 250,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           }
         ],
         "summary": "Get all observable properties",
@@ -405,19 +427,23 @@
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 0,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 250,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           }
         ],
         "summary": "Get all observation types",
@@ -437,19 +463,23 @@
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 0,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 250,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           }
         ],
         "summary": "Get all taxa",
@@ -469,19 +499,23 @@
             "in": "query",
             "name": "skip",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 0,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 0
+            }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-            "type": "integer",
             "required": true,
-            "default": 250,
-            "format": "int32"
+            "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 250
+            }
           }
         ],
         "summary": "Get all species",
