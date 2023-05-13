@@ -169,7 +169,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "site"
+              "example": "http://environment.data.gov.uk/ecology/def/BiosysFreshwaterSite"
             }
           },
           {
@@ -277,7 +277,7 @@
             ],
             "schema": {
               "type": "string",
-              "default": "fish"
+              "example": "http://environment.data.gov.uk/ecology/def/BiosysFreshwaterSite"
             }
           },
           {
@@ -350,7 +350,8 @@
             "description": "",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "http://environment.data.gov.uk/ecology/sampling/bio/879037"
             }
           }
         ],
