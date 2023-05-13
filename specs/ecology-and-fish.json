@@ -7,12 +7,12 @@
   },
   "servers": [
     {
-      "url": "https://environment.data.gov.uk",
+      "url": "https://environment.data.gov.uk/ecology/api/v1",
       "description": "Environment Agency"
     }
   ],
   "paths": {
-    "/ecology/api/v1/observations": {
+    "/observations": {
       "get": {
          "responses": {
           "200": {
@@ -76,7 +76,8 @@
               }
             ],
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fdef%2Fbio%2FWhptAspt"
             }
           },
           {
@@ -93,7 +94,8 @@
               }
             ],
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example" : "http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fdef%2Fbio%2FWhptAspt"
             }
           },
           {
@@ -110,7 +112,8 @@
               }
             ],
             "schema": {
-              "type": "string"
+              "type": "string",
+              "example": "http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fspecies%2Ffish%2F194 "
             }
           },
           {
@@ -120,7 +123,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "default": "2023-05-11"
+              "default": "2020-01-31"
             }
           },
           {
@@ -130,7 +133,7 @@
             "required": false,
             "schema":{
                 "type": "string",
-                "default": "1960-01-01"
+                "default": "2020-01-01"
             }
           }
         ],
@@ -139,7 +142,7 @@
         "tags": ["observations"]
       }
     },
-    "/ecology/api/v1/sites": {
+    "/sites": {
       "get": {
         "responses": {
           "default": {
@@ -183,33 +186,41 @@
             "in": "query",
             "name": "type",
             "description": "",
-            "type": "string",
-            "required": false
+            "required": false,
+            "schema": {
+                "type": "string",
+                "default": "site"
+            }
           },
           {
             "in": "query",
             "name": "lat",
             "description": "",
-            "type": "number",
             "required": false,
-            "format": "double"
+            "schema": {
+                "type": "number",
+                "default": 51.5
+            }
           },
           {
             "in": "query",
             "name": "long",
             "description": "",
-            "type": "number",
             "required": false,
-            "format": "double"
+            "schema": {
+                "type": "number",
+                "default": 5
+            }
           },
           {
             "in": "query",
             "name": "distance_km",
             "description": "",
-            "type": "number",
-            "required": false,
-            "default": 5,
-            "format": "double"
+           "required": false,
+            "schema": {
+                "type": "number",
+                "default": 5
+            }
           }
         ],
         "summary": "Get sites",
@@ -217,7 +228,7 @@
         "tags": ["sites"]
       }
     },
-    "/ecology/api/v1/sites/{site-id}": {
+    "/sites/{site-id}": {
       "get": {
         "responses": {
           "default": {
@@ -229,8 +240,10 @@
             "in": "path",
             "name": "site-id",
             "description": "",
-            "type": "string",
-            "required": true
+            "required": true,
+            "schema": {
+                "type": "string"
+            }
           }
         ],
         "summary": "Get site by ID",
@@ -238,7 +251,7 @@
         "tags": ["sites"]
       }
     },
-    "/ecology/api/v1/surveys": {
+    "/surveys": {
       "get": {
         "responses": {
           "default": {
@@ -327,7 +340,7 @@
         "tags": ["surveys"]
       }
     },
-    "/ecology/api/v1/surveys/{survey-id}": {
+    "/surveys/{survey-id}": {
       "get": {
         "responses": {
           "default": {
@@ -348,7 +361,7 @@
         "tags": ["surveys"]
       }
     },
-    "/ecology/api/v1/properties": {
+    "/properties": {
       "get": {
         "responses": {
           "default": {
@@ -380,7 +393,7 @@
         "tags": ["observable properties"]
       }
     },
-    "/ecology/api/v1/observation-types": {
+    "/observation-types": {
       "get": {
         "responses": {
           "default": {
@@ -412,7 +425,7 @@
         "tags": ["observation types"]
       }
     },
-    "/ecology/api/v1/taxa": {
+    "/taxa": {
       "get": {
         "responses": {
           "default": {
@@ -444,7 +457,7 @@
         "tags": ["features of interest"]
       }
     },
-    "/ecology/api/v1/species": {
+    "/species": {
       "get": {
         "responses": {
           "default": {
