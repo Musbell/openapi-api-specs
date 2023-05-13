@@ -61,6 +61,24 @@
               "type": "string"
             }
           },
+           {
+            "in": "query",
+            "name": "ultimate_foi_id",
+            "description": "",
+            "required": false,
+            "x-anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "array"
+              }
+            ],
+            "schema": {
+              "type": "string",
+              "example": "http://environment.data.gov.uk/ecology/site/bio/10254"
+            }
+          },
           {
             "in": "query",
             "name": "site_id",
