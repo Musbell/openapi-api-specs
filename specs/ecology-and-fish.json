@@ -14,7 +14,7 @@
   "paths": {
     "/observations": {
       "get": {
-         "responses": {
+        "responses": {
           "200": {
             "description": "OK"
           }
@@ -25,23 +25,23 @@
             "name": "skip",
             "description": "",
             "required": false,
-            "schema":{
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
             "in": "query",
             "name": "take",
             "description": "",
-           
+
             "required": false,
-           
-            "schema":{
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           },
           {
@@ -59,7 +59,6 @@
             ],
             "schema": {
               "type": "string"
-
             }
           },
           {
@@ -77,7 +76,7 @@
             ],
             "schema": {
               "type": "string",
-              "example": "http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fdef%2Fbio%2FWhptAspt"
+              "example": "http://environment.data.gov.uk/ecology/site/bio/10254"
             }
           },
           {
@@ -95,25 +94,7 @@
             ],
             "schema": {
               "type": "string",
-              "example" : "http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fdef%2Fbio%2FWhptAspt"
-            }
-          },
-          {
-            "in": "query",
-            "name": "ultimate_foi_id",
-            "description": "",
-            "required": false,
-            "x-anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "array"
-              }
-            ],
-            "schema": {
-              "type": "string",
-              "example": "http%3A%2F%2Fenvironment.data.gov.uk%2Fecology%2Fspecies%2Ffish%2F194 "
+              "example": "http://environment.data.gov.uk/ecology/def/bio/WhptAspt"
             }
           },
           {
@@ -122,8 +103,7 @@
             "description": "",
             "required": false,
             "schema": {
-              "type": "string",
-              "default": "2020-01-31"
+              "type": "string"
             }
           },
           {
@@ -131,9 +111,8 @@
             "name": "date_from",
             "description": "",
             "required": false,
-            "schema":{
-                "type": "string",
-                "default": "2020-01-01"
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -155,10 +134,10 @@
             "name": "skip",
             "description": "",
             "required": true,
-            "schema":{
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
@@ -166,10 +145,10 @@
             "name": "take",
             "description": "",
             "required": true,
-            "schema":{
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           },
           {
@@ -177,9 +156,10 @@
             "name": "mode",
             "description": "",
             "required": true,
-            "schema":{
-                "type": "string",
-                "default": "minimal"
+            "schema": {
+              "type": "string",
+              "enum": ["minimal", "props"],
+              "default": "minimal"
             }
           },
           {
@@ -188,8 +168,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "string",
-                "default": "site"
+              "type": "string",
+              "default": "site"
             }
           },
           {
@@ -198,8 +178,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "number",
-                "default": 51.5
+              "type": "number",
+              "example": 51.44553
             }
           },
           {
@@ -208,18 +188,18 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "number",
-                "default": 5
+              "type": "number",
+              "example": -2.54344
             }
           },
           {
             "in": "query",
             "name": "distance_km",
             "description": "",
-           "required": false,
+            "required": false,
             "schema": {
-                "type": "number",
-                "default": 5
+              "type": "number",
+              "default": 5
             }
           }
         ],
@@ -242,7 +222,7 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "string"
+              "type": "string"
             }
           }
         ],
@@ -266,9 +246,9 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
@@ -277,9 +257,9 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           },
           {
@@ -296,8 +276,8 @@
               }
             ],
             "schema": {
-                "type": "string",
-                "default": "fish"
+              "type": "string",
+              "default": "fish"
             }
           },
           {
@@ -306,8 +286,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "string",
-                "default": "2023-05-11"
+              "type": "string",
+              "default": "2023-05-11"
             }
           },
           {
@@ -316,8 +296,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "string",
-                "default": "2016-01-01"
+              "type": "string",
+              "default": "2016-01-01"
             }
           },
           {
@@ -326,8 +306,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "number",
-                "default": 51.5
+              "type": "number",
+              "example": 51.44553
             }
           },
           {
@@ -336,8 +316,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "number",
-                "default": 5
+              "type": "number",
+              "example": -2.54344
             }
           },
           {
@@ -346,8 +326,8 @@
             "description": "",
             "required": false,
             "schema": {
-                "type": "number",
-                "default": 5
+              "type": "number",
+              "default": 5
             }
           }
         ],
@@ -370,7 +350,7 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "string"
+              "type": "string"
             }
           }
         ],
@@ -393,9 +373,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
@@ -404,9 +384,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           }
         ],
@@ -429,9 +409,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
@@ -440,9 +420,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           }
         ],
@@ -465,9 +445,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
@@ -476,9 +456,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           }
         ],
@@ -501,9 +481,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 0
+              "type": "integer",
+              "format": "int32",
+              "default": 0
             }
           },
           {
@@ -512,9 +492,9 @@
             "description": "",
             "required": true,
             "schema": {
-                "type": "integer",
-                "format": "int32",
-                "default": 250
+              "type": "integer",
+              "format": "int32",
+              "default": 250
             }
           }
         ],
