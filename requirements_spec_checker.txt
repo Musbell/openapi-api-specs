@@ -10,7 +10,7 @@ multidict==6.0.4
 pydantic==1.10.6
 PyYAML==6.0
 regex==2022.10.31
-requests==2.28.2
+requests==2.31.0
 tiktoken==0.3.2
 typing_extensions==4.5.0
 urllib3==1.26.15
